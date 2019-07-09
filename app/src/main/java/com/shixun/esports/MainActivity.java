@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText username;
     private EditText password;
     private TextView result;
+    String STR = null;
     Handler mHandler;
 
     SharedPreferences sprfMain;
@@ -55,17 +56,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sprfMain= PreferenceManager.getDefaultSharedPreferences(this);
         editorMain=sprfMain.edit();
-        if(sprfMain.getBoolean("main",false)){
-            Intent intent=new Intent(MainActivity.this,HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        final String Username = sprfMain.getString("username","");
+        String Password = sprfMain.getString("password","");
+        if(sprfMain.getBoolean("main",false)) {
+            save(Username);
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, HomeActivity.class);
+            intent.putExtra("用户名",Username);
+            MainActivity.this.startActivity(intent);
+    }
 
         setContentView(R.layout.login);
-
         initView();
         initEvent();
-
 
     }
 
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 intent.setClass(MainActivity.this, HomeActivity.class);
                                 intent.putExtra("用户名",username.getText().toString());
                                 MainActivity.this.startActivity(intent);
+                                editorMain.putString("username",username.getText().toString());
+                                editorMain.putString("password",password.getText().toString());
                                 editorMain.putBoolean("main",true);
                                 editorMain.commit();
                                 finish();
@@ -204,7 +209,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
         @Override
         protected void onPostExecute(String s) {
-
             tv.setText(s);
             msg.obj=tv.getText().toString();
             mHandler.sendMessage(msg);

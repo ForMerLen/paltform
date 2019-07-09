@@ -3,15 +3,19 @@ package com.shixun.esports.Fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +25,7 @@ import androidx.annotation.Nullable;
 import com.shixun.esports.Activity.G_Order_Activity;
 import com.shixun.esports.Activity.HomeActivity;
 import com.shixun.esports.Activity.OrderActivity;
+import com.shixun.esports.Activity.Setting;
 import com.shixun.esports.R;
 import com.shixun.esports.Tools.StringUtil;
 
@@ -35,6 +40,8 @@ public class MineFragment extends Fragment {
     private HomeActivity mActivity;
     private ImageView g_order;
     private ImageView x_order;
+    private ImageButton setting;
+
 
 
     @Nullable
@@ -46,6 +53,8 @@ public class MineFragment extends Fragment {
         username=(TextView)view.findViewById(R.id.UserName);
         g_order=(ImageView)view.findViewById(R.id.g_order);
         x_order=(ImageView)view.findViewById(R.id.x_order);
+        setting = (ImageButton)view.findViewById(R.id.setting);
+
 
         g_order.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +82,17 @@ public class MineFragment extends Fragment {
             }
         });
 
+        setting.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity().getApplicationContext(), Setting.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+
+
 
     public Handler mHandler=new Handler(){
         @Override
@@ -87,8 +105,8 @@ public class MineFragment extends Fragment {
                     JSONArray jsonArray = new JSONArray(data);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                        username.setText("用户名："+jsonObject.getString("username"));
-                        userid.setText("用户ID："+jsonObject.getString("userid"));
+                        username.setText(jsonObject.getString("username"));
+                        userid.setText("UID："+jsonObject.getString("userid"));
                         flag=jsonObject.getString("status");
                     }
                 }

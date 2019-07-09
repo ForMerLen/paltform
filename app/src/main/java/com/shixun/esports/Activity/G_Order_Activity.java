@@ -120,6 +120,7 @@ public class G_Order_Activity extends AppCompatActivity{
                     Str=list.get(p).get("status");
                     if(Str.equals("已接单")) {
                         cancel.setText("订单完成");
+                        cancel.setEnabled(true);
                     }
                     else if(Str.equals("已完成")) {
                         cancel.setText("已完成");
@@ -131,6 +132,7 @@ public class G_Order_Activity extends AppCompatActivity{
                     }
                     else if(Str.equals("待接单")){
                         cancel.setText("接单");
+                        cancel.setEnabled(true);
                     }
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override

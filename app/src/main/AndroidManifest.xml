@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.OrderActivity"></activity>
-        <activity android:name=".Activity.G_Order_Activity"></activity>
+        <activity android:name=".Activity.Setting"></activity>
+        <activity android:name=".Activity.OrderActivity" />
+        <activity android:name=".Activity.G_Order_Activity" />
         <activity android:name=".Activity.InfoActivity" />
         <activity android:name=".Activity.TestActivity" />
         <activity android:name=".Activity.RegisterActivity" />

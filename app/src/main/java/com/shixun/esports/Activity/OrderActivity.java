@@ -120,6 +120,7 @@ public class OrderActivity extends AppCompatActivity{
                     Str=list.get(p).get("status");
                     if(Str.equals("待接单")){
                         cancel.setText("取消订单");
+                        cancel.setEnabled(true);
                     }
                     else if(Str.equals("已接单")){
                         cancel.setText("已接单");
@@ -133,6 +134,7 @@ public class OrderActivity extends AppCompatActivity{
                         cancel.setText("已取消");
                         cancel.setEnabled(false);
                     }
+                    cancel.setTag(position);
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
